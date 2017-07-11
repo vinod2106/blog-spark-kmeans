@@ -2,16 +2,20 @@ package com.chimpler.example.kmeans
 
 import java.io._
 import java.util.Properties
+
+import com.typesafe.scalalogging.LazyLogging
 import twitter4j._
+import org.apache.log4j._
 
-object FetchTweets extends App {
-  if (args.length < 2) {
-    sys.error("Arguments: <credential_file> <output_file> <keywords>")
-  }
+object FetchTweets extends App with LazyLogging {
 
-  val properties = new Properties()
-  properties.load(new FileInputStream(args(0)))
-
+/*  val apiKey = "6WXqSjGtZvwEZjvRmAARtLuO8"
+  val apiSecret = "ZMzXv0RIvlCTmpugomOttQKbDWsxGT0wBrnppBAZa7v3EnoYYo"
+  val accessToken = "1883532464-vKve85BRvaco1rBMqsXHaJKOBeoYdDAG0tZTxZU"
+  val accessTokenSecret = "GGoPxGgNMMdHElZrUhIItKpttVbIg8d9COa1Utbig"*/
+  logger.debug("Here goes my debug message.")
+val properties = new Properties()
+  properties.load(new FileInputStream("twitter-credentials.txt"))
 
   val apiKey = properties.getProperty("TWITTER_API_KEY").trim
   val apiSecret = properties.getProperty("TWITTER_API_SECRET").trim
@@ -28,14 +32,14 @@ object FetchTweets extends App {
 
   val twitterStream = new TwitterStreamFactory(twitterConfig).getInstance()
 
-  val outputFile = args(1)
+  val outputFile = "output1.txt"
   val fileWriter = new FileWriter(outputFile)
 
   val geoStatusListener = new GeoStatusListener(fileWriter)
   twitterStream.addListener(geoStatusListener)
 
-  val queryKeywords = args.slice(2, args.length)
-
+  //val queryKeywords = args.slice(2, args.length)
+  val queryKeywords = "Twitter".trim.split(" ")
   var query = new FilterQuery()
 
   // with the twitter api, we cannot do filter by both location and keyword

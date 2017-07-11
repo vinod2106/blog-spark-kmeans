@@ -221,14 +221,16 @@ object KMeansApp extends App {
     }
   }
 
-
-  if (args.length < 2) {
+//to make it run in intellij
+/*  if (args.length < 2) {
     sys.error("Arguments: <tweet_file> <output_image_file>")
   }
 
   val tweetFilename = args(0)
-  val imageFilename = args(1)
+  val imageFilename = args(1)*/
 
+  val tweetFilename = "output1.txt"
+  val imageFilename = "output_image.png"
   val sc = new SparkContext("local[4]", "kmeans")
 
   // Load and parse the data
