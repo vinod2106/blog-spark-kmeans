@@ -5,16 +5,11 @@ import java.util.Properties
 
 import com.typesafe.scalalogging.LazyLogging
 import twitter4j._
-import org.apache.log4j._
 
 object FetchTweets extends App with LazyLogging {
 
-/*  val apiKey = "6WXqSjGtZvwEZjvRmAARtLuO8"
-  val apiSecret = "ZMzXv0RIvlCTmpugomOttQKbDWsxGT0wBrnppBAZa7v3EnoYYo"
-  val accessToken = "1883532464-vKve85BRvaco1rBMqsXHaJKOBeoYdDAG0tZTxZU"
-  val accessTokenSecret = "GGoPxGgNMMdHElZrUhIItKpttVbIg8d9COa1Utbig"*/
   logger.debug("Here goes my debug message.")
-val properties = new Properties()
+  val properties = new Properties()
   properties.load(new FileInputStream("twitter-credentials.txt"))
 
   val apiKey = properties.getProperty("TWITTER_API_KEY").trim
